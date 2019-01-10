@@ -1,0 +1,4 @@
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\BussinessLogic\bin\Debug\BussinessLogic.dll
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\BussinessLogic\bin\Debug\BussinessLogic.pdb
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\BussinessLogic\obj\Debug\BussinessLogic.dll
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\BussinessLogic\obj\Debug\BussinessLogic.pdb

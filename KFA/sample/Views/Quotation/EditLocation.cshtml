@@ -1,0 +1,50 @@
+﻿@model sample.Models.LocationModel
+
+
+@{
+    ViewBag.Title = "Location";
+}
+<div>
+    @if (TempData["location"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["location"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Location Setup</h4></div>
+        <div class="panel-body">
+            <div class="col-lg-offset-0">
+
+                <fieldset class="col-lg-12 form-group  form-inline">
+                    <legend>Edit Location</legend>
+                    @using (Ajax.BeginForm("Location", "Quotation", new AjaxOptions { HttpMethod = "post" }, new { @class = "form-inline", @id = "formId" }))
+                    {
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Location, new { @class = "" })
+                            @Html.TextBoxFor(model => model.Location, new { @Id = "", @class = "form-control input-sm", placeholder = "Location" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Amount, new { @class = "" })
+                            @Html.TextBoxFor(model => model.Amount, new { @Id = "", @class = "form-control input-sm", placeholder = "Transport-Fee" })
+
+                        </div>
+
+
+                        <div class="form-group" style="padding:1em">
+                           
+                            <input type="submit" value="Edit" class="btn btn-primary form-control col-xs-2" id="butt" />
+                        </div>
+                    }
+                </fieldset>
+            </div>
+        </div>
+
+    </div>
+
+</div>

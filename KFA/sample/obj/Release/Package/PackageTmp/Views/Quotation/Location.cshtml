@@ -1,0 +1,90 @@
+﻿@model sample.Models.LocationModel
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Location";
+}
+<div>
+    @if (TempData["location"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["location"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+</div>
+    <div class="panel panel-default text-uppercase">
+        <div class="panel-heading" style="font-size:xx-large"><img src="~/Content/Images/logo.png" alt="Smiley face" />KFA Locations</div>
+        <div class="panel-body">
+            <div class="col-lg-offset-0">
+
+                <fieldset class="col-lg-12 form-group  form-inline">
+                    <legend>Location</legend>
+                    @using (Ajax.BeginForm("Location", "Quotation", new AjaxOptions { HttpMethod = "post" }, new { @class = "form-inline", @id = "formId" }))
+                    {
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Location, new { @class = "" })
+                            @Html.TextBoxFor(model => model.Location, new { @Id = "", @class = "form-control input-sm", placeholder = "Location" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Amount, new { @class = "" })
+                            @Html.TextBoxFor(model => model.Amount, new { @Id = "", @class = "form-control input-sm", placeholder = "Transport-Fee" })
+
+                        </div>
+
+
+                        <div class="form-group" style="padding:1em">
+                            <br />
+                            <input type="submit" value="Save" class="btn btn-primary form-control col-xs-2" id="butt" />
+                        </div>
+                    }
+                </fieldset>
+                <div class="col-lg-offset-0 col-lg-12">
+                    @*<div class="btn btn-default"> @Html.ActionLink("Create Customer", "Createcustomers")</div>*@
+                    <table class="table table-striped">
+                        <thead>
+                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.Location)</th>
+                                <th> @Html.DisplayNameFor(model => model.Amount)</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.LocationList)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.Id)</td>
+                                    <td>@Html.DisplayFor(m => item.Location)</td>
+                                    <td>&#x20a6 @Html.DisplayFor(m => item.Amount)</td>
+
+                                    <td>
+                                        @Html.ActionLink("Edit", "EditLocation", new { id = item.Id }) |
+
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-default btn-sm">
+                                            <i class="glyphicon glyphicon-cog"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,283 @@
+﻿@model sample.Models.ReceiptModel
+@using GridMvc.Html
+@{
+    decimal transport = Model.Trasport.Sum(m => m.TransportBill);
+    decimal Amountsum = Model.BillingList.Sum(m => m.Amount);
+    decimal tenpercent = Decimal.Multiply(Amountsum, decimal.Parse("0.1"));
+    decimal grandTotal = Amountsum + tenpercent + transport;
+    var invoice =String.Format("KFA6{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
+}
+
+<div class="container" style="font-size:xx-small; margin-right:10%;background-color:white">
+    <br />
+
+    <fieldset>
+
+        <legend><img src="~/Content/Images/logo.png" alt="Smiley face" style="width:50px" />RENTALS  TERMS AND CONDITIONS.</legend>
+
+        <h4 class="text-primary">REVIEW</h4>
+        <ul>
+            <li>PLEASE READ OUR TERMS & CONDITIONS CAREFULLY. IF YOU ORDER FROM US, IT WILL BE ASSUMED YOU HAVE READ AND UNDERSTAND THE ITEMS OUTLINED ON THIS PAGE, AND AGREE TO ABIDE BY THEM. PLEASE REVIEW THE ABOVE QUOTATION. </li>
+        </ul>
+        <h4 class="text-primary">PAYMENT</h4>
+        <ul>
+            <li>FULL PAYMENT INTO OUR BANK ACCOUNT CONFIRMS THE ORDER/ BOOKING . KINDLY NOTIFY US WHEN PAYMENT IS MADE INTO OUR ACCOUNT TO ENABLE US PROCESS THE ORDER. </li>
+        </ul>
+
+        <h4 class="text-primary">DELIVERY & RETRIEVAL</h4>
+        <ul>
+            <li>
+                WE WILL TRY TO DELIVER YOUR ORDER A DAY BEFORE YOUR EVENT.
+                WE WILL RETRIEVE THE ITEMS IMMEDIATELY AFTER THE EVENT, IN THE EVENT THAT THIS ISN’T DONE, KINDLY PUT A CALL THROUGH TO MRS ADELEKE ON 08062795680.
+
+            </li>
+        </ul>
+
+
+        <h4 class="text-primary">WEATHER:</h4>
+        <ul>
+            <li>CLIENT UNDERSTANDS THAT TENTS ARE TEMPORARY STRUCTURES DESIGNED TO PROVIDE LIMITED PROTECTION FROM WEATHER CONDITIONS, PRIMARILY SUN AND RAIN; HOWEVER, THERE MAY BE SITUATIONS, PARTICULARLY INVOLVING STRONG WINDS, IN WHICH THE TENTS WILL NOT PROVIDE PROTECTION AND MAY EVEN BE DAMAGED OR BLOWN OVER. EVACUATION OF TENTS TO AVOID POSSIBLE INJURY IS RECOMMENDED WHEN SEVERE WEATHER THREATENS THE AREA WHERE TENT IS ERECTED. PEOPLE MUST LEAVE TENTS AND NOT SEEK SHELTER IN TENTS DURING SUCH CONDITIONS. </li>
+        </ul>
+    </fieldset>
+   
+    <hr />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+<hr />
+        <div class="contatiner col-lg-6" style="margin-left:11%;font-size:xx-small">
+            <span class="col-lg-6 text-center">
+
+                <br />
+                <label style="margin-left:11%;font-size:xx-small">
+                    <p><img src="~/Content/Images/logo.png" alt="Smiley face" style="width:50px" /></p>
+                    <br />
+                        KM 15, LEKKI EPE EXPRESSWAY, OPPOSITE NICON ESTATES, LEKKI
+                        <br />
+                        TEL: 0806 279 5680, 0704 043 4341<br />
+                        WWW.KFARENTAL.COM, KFARENTALS@GMAIL.COM
+                    <br />
+                    @DateTime.Now.Day.ToString()  @TempData["month"] @DateTime.Now.Year
+                </label>
+
+              
+            </span>
+
+        </div>
+<div class="container" style="margin-right:10%;background-color:white">
+    <div class="pull-left col-lg-4">
+        <div class="form-group" style="font-size:xx-small">
+            <strong>NAME OF CLIENT</strong>: @Html.DisplayFor(x => x.Name)
+            <br />
+            <strong>DATE OF EVENT</strong>: @Html.DisplayFor(x => x.eventdate)
+            <br />
+            <strong>DATE OF SETUP</strong>: @Html.DisplayFor(x => x.SetUpDate)
+            <br />
+            <strong>ADDRESS OF DELIVERY</strong>: @Html.DisplayFor(x => x.FullAddress)
+            <br />
+            <strong>INVOICE NUMBER</strong>: @invoice;
+        </div>
+
+    </div>
+
+    
+
+    </div>
+
+   <div class="container" style="font-size:xx-small;background-color:white;margin-right:10%">
+    <fieldset>
+        <legend style="font-size:xx-small;">QUOTATION FOR RENTALS</legend>
+        <div class="col-lg-12">
+            @Html.Grid(Model.BillingList).Columns(columns =>
+        {
+            columns.Add(c => c.description).Titled("Description");
+            columns.Add(c => c.Quantity).Titled("Quantity");
+            columns.Add(c => c.Rate).Titled("Rate(&#x20a6)");
+            columns.Add(c => c.Amount).Titled("Amount(&#x20a6)");
+        })
+        </div>
+        <div class="col-lg-12" id="billgrid">
+            <table class="table table-striped col-lg-12" id="htable">
+                <tbody>
+
+
+
+                    <tr>
+                        <td id="des"><strong>SUB TOTAL </strong></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+                        <td id="amt"><strong>@Model.BillingList.Sum(m => m.Amount)</strong></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td id="des">10% HANDLING </td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+
+
+                        <td id="amt">@tenpercent</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td id="des">TRANSPORTATION </td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+
+
+                        <td id="amt">@Model.Trasport.Sum(m => m.TransportBill)</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td id="des"><strong>GRAND TOTAL</strong></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+                        <td id="amt"><strong>@grandTotal</strong></td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-danger col-lg-offset-4 col-lg-4" style="border:solid 1px red;">
+                <div class="form-group">
+                    <strong>OUR BANK DETAILS </strong>
+                    <br />
+                    <strong>BANK NAME</strong>: ZENITH
+                    <br />
+                    <strong>NAME OF THE ACCOUNT</strong>: KFA RENTALS
+                    <br />
+                    <strong>ACCOUNT NUMBER </strong>: 1012657767
+                    <br />
+                    <strong>SORT CODE  </strong>: 05715059
+                </div>
+            </div>
+            <br />
+          
+                <button class="bth btn-primary" onclick="javascript:window.print()">Print</button>
+            
+        </div>
+    </fieldset>
+</div>
+      
+   <script type="text/javascript">
+       $(document).ready(function () {
+           $("#hide").hide();
+       });
+    </script>
+
+
+
+    

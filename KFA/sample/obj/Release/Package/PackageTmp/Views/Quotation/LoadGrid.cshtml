@@ -1,0 +1,67 @@
+﻿@model sample.Models.QuotationModel
+@*@using GridMvc.Html*@
+<div>
+    @*<fieldset class="col-lg-12 form-group">*@
+        <label><span class="col-lg-12" style="color:red" id="customerName">Please Select Customer to Create Quotation</span></label>
+        <label>
+            <span class="col-lg-12" style="color:green" id="inv">
+                @if (TempData["number"] != null)
+                {@TempData["number"].ToString()}
+            </span>
+        </label>
+        <div class="col-lg-offset-0 col-lg-12" id="billgrid">
+            <table class="table table-striped col-lg-12" id="htable">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.description)</th>
+                        <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+                        <th> @Html.DisplayNameFor(model => model.Rate)</th>
+                        <th> @Html.DisplayNameFor(model => model.Amount)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.BillingList != null)
+                    {
+
+
+                        foreach (var item in Model.BillingList)
+                        {
+                            <tr>
+                                <td id="des">@Html.DisplayFor(m => item.description)</td>
+                                <td id="qua">@Html.DisplayFor(m => item.Quantity)</td>
+                                <td id="rate">&#x20a6 @Html.DisplayFor(m => item.Rate)</td>
+                                <td id="amt">@Html.DisplayFor(m => item.Amount)</td>
+                                <td>
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.BillId })
+                                </td>
+                              
+                            </tr>
+
+                        }
+
+                        @*@Html.Grid(Model.BillingList).Columns(columns =>
+                            {
+                                columns.Add(c => c.description).Titled("Description");
+                                columns.Add(c => c.Quantity).Titled("Quantity");
+                                columns.Add(c => c.Rate).Titled("Rate(&#x20a6)");
+                                columns.Add(c => c.Amount).Titled("Amount(&#x20a6)");
+
+
+
+                                //columns.Add(c => c.BillId)
+                                //       .Titled("Edit")
+                                //       .Sanitized(false)
+                                //       .Encoded(false)
+                                //    //.RenderValueAs(o => Html.ActionLink("Edit", "EditCustomer", "Customer", new { CustomerId = o.CustomerId }, new { title = "Please click here to edit the record", @class = "modal-link" }).ToHtmlString());
+                                //    .RenderValueAs(c => Html.ActionLink("Edit", "Editcustomers", new { controller = "CustomerManager", Id = c.BillId }));*@
+
+
+                        @*}).WithPaging(10).Sortable(true)*@
+                    }
+                </tbody>
+            </table>
+
+        </div>
+</div>
+    @*</fieldset>
+</div>*@

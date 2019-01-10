@@ -1,0 +1,352 @@
+﻿@model sample.Models.ReceiptModel
+@using GridMvc.Html
+@{
+    decimal transport = Model.Trasport.Sum(m => m.TransportBill);
+    decimal Amountsum = Model.BillingList.Sum(m => m.Amount);
+    decimal tenpercent = Math.Round(Decimal.Multiply(Amountsum, decimal.Parse("0.05")),2);
+    decimal grandTotal = Amountsum + tenpercent + transport;
+    var invoice ="KFA"+Session["Number"].ToString();
+    var val = Json.Encode(Model);
+}
+
+<div class="container" style="font-size:xx-small; margin-right:10%;background-color:white">
+    <br />
+
+    <fieldset>
+
+        <legend>RENTALS  TERMS AND CONDITIONS.</legend>
+
+        <h4 class="text-primary">REVIEW</h4>
+        <ul>
+            <li>PLEASE READ OUR TERMS & CONDITIONS CAREFULLY. IF YOU ORDER FROM US, IT WILL BE ASSUMED YOU HAVE READ AND UNDERSTAND THE ITEMS OUTLINED ON THIS PAGE, AND AGREE TO ABIDE BY THEM. PLEASE REVIEW THE ABOVE QUOTATION. </li>
+        </ul>
+        <h4 class="text-primary">PAYMENT</h4>
+        <ul>
+            <li>	FULL PAYMENT INTO OUR BANK ACCOUNT CONFIRMS THE ORDER AT LEAST ONE WEEK TO YOUR EVENT.  KINDLY NOTIFY US VIA EMAIL WHEN PAYMENT IS MADE INTO OUR ACCOUNT TO ENABLE US PROCESS THE ORDER. KFA WILL NOT COLLECT CASH FOR ANY TRANSACTION. PAYMENT IS NOT ALLOWED AT THE POINT OF DELIVERY. PLEASE USE NAME ON QUOTATION TO REFERENCE PAYMENT.</li>
+        </ul>
+
+        <h4 class="text-primary">DELIVERY & RETRIEVAL</h4>
+        <ul>
+            <li>
+                	WE WILL DELIVER YOUR ORDER THE EVENING BEFORE YOUR EVENT DEPENDING ON THE BOOKINGS WE HAVE. WE WILL RETRIEVE THE ITEMS IMMEDIATELY AFTER THE EVENT, IN THE EVENT THAT THIS ISN’T DONE, KINDLY PUT A CALL THROUGH TO MRS. ADELEKE ON 08062795680.  <br>  RENTAL ITEMS THAT HAVE BEEN CHECKED OUT OF KFA WILL NOT BE REFUNDED IF NOT USED AT CLIENT’S LOCATION. <br> 	WE ADVISE OUR CLIENTS TO TAKE GOOD CARE OF ALL THE RENTAL ITEMS FROM KFA. WE VALUE OUR PRODUCTS.
+
+            </li>
+        </ul>
+
+        <h4 class="text-primary">TABLE COVER</h4>
+        <ul>
+            <li>
+                KFA WILL CHARGE A REFUNDABLE DEPOSIT ON TABLE LINENS BASED ON THE QUANTITY BEING RENTED. <br> PLEASE CHECK THE WRAPPED LINENS GIVEN TO YOU IF YOU ARE DOING A PICKUP AND ALSO IF THE LINENS ARE DELIVERED TO YOU. PLEASE ENSURE THE LINENS ARE NOT BURNT OR TORN.
+            </li>
+        </ul>
+
+        <h4 class="text-primary">WEATHER:</h4>
+        <ul>
+            <li>CLIENT UNDERSTANDS THAT TENTS ARE TEMPORARY STRUCTURES DESIGNED TO PROVIDE LIMITED PROTECTION FROM WEATHER CONDITIONS, PRIMARILY SUN AND RAIN; HOWEVER, THERE MAY BE SITUATIONS, PARTICULARLY INVOLVING STRONG WINDS, IN WHICH THE TENTS WILL NOT PROVIDE PROTECTION AND MAY EVEN BE DAMAGED OR BLOWN OVER. EVACUATION OF TENTS TO AVOID POSSIBLE INJURY IS RECOMMENDED WHEN SEVERE WEATHER THREATENS THE AREA WHERE TENT IS ERECTED. PEOPLE MUST LEAVE TENTS AND NOT SEEK SHELTER IN TENTS DURING SUCH CONDITIONS.   </li>
+        </ul>
+
+        <h4 class="text-primary">GENERAL INFORMATION </h4>
+            <ul>
+                <li>  PLEASE NOTE THAT KFA DOES NOT MIX THE RENTAL ITEMS WITH OTHER COMPANIES. THIS IS TO PREVENT ITEMS FROM BEING MIXED UP. KINDLY LET THE SETUP CREW KNOW THE EXACT LOCATION YOU WANT YOUR ORDER TO BE SETUP. RENTAL ORDERS ARE FOR A DAY ONLY. PLEASE LET US KNOW IF THE ITEMS ARE GOING TO BE USED FOR ADDITIONAL DAYS. PLEASE ADVISE YOUR DECORATORS NOT TO USE PINS OR TEAR OUR CANOPIES.
+</li>
+            </ul>
+       
+    </fieldset>
+    <hr />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+<hr />
+        <div class="contatiner col-lg-6" style="margin-left:11%;font-size:xx-small">
+            <span class="col-lg-6 text-center">
+
+                <br />
+                <label style="margin-left:11%;font-size:xx-small">
+                   
+                    <br />
+                        KM 15, LEKKI EPE EXPRESSWAY, OPPOSITE NICON ESTATES, LEKKI
+                        <br />
+                        TEL: 0806 279 5680, 0704 043 4341<br />
+                        WWW.KFARENTAL.COM, KFARENTALS@GMAIL.COM
+                    <br />
+                    @DateTime.Now.Day.ToString()  @TempData["month"] @DateTime.Now.Year
+                </label>
+
+              
+            </span>
+
+        </div>
+<div class="container" style="margin-right:10%;background-color:white">
+    <div class="pull-left col-lg-4">
+        <div class="form-group" style="font-size:xx-small">
+            <strong>NAME OF CLIENT</strong>: @Html.DisplayFor(x => x.Name)
+            <br />
+            <strong>DATE OF EVENT</strong>: @Html.DisplayFor(x => x.eventdate)
+            <br />
+            <strong>DATE OF SETUP</strong>: @Html.DisplayFor(x => x.SetUpDate)
+            <br />
+            <strong>ADDRESS OF DELIVERY</strong>: @Html.DisplayFor(x => x.FullAddress)
+            <br />
+            <strong>INVOICE NUMBER</strong>: @invoice;
+        </div>
+
+    </div>
+
+    
+
+    </div>
+
+   <div class="container" style="font-size:xx-small;background-color:white;margin-right:10%">
+    <fieldset>
+        <legend style="font-size:xx-small;">QUOTATION FOR RENTALS</legend>
+       
+          <div class="col-lg-offset-0 col-lg-12">
+                  
+                    <table class="table table-striped">
+                        <thead>
+                           
+                            <tr>
+                               
+                                <th>@Html.DisplayNameFor(model => model.description)</th>
+                                <th> @Html.DisplayNameFor(model => model.Quantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.Rate)</th>
+                                <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                              
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.BillingList)
+                            {
+                                <tr>
+                                 
+                                    <td>@Html.DisplayFor(m => item.description)</td>
+                                    <td>@Html.DisplayFor(m => item.Quantity)</td>
+                                    <td>&#x20a6 @Html.DisplayFor(m => item.Rate)</td>
+                                    <td>&#x20a6 @Html.DisplayFor(m => item.Amount)</td>
+
+                                   
+                                    
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+
+        <div class="col-lg-12" id="billgrid">
+            <table class="table table-striped col-lg-12" id="htable">
+                <tbody>
+
+
+
+                    <tr>
+                        <td id="des"><strong>SUB TOTAL </strong></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+                        <td id="amt"><strong>@Model.BillingList.Sum(m => m.Amount)</strong></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td id="des">5% VAT </td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+
+
+                        <td id="amt">@tenpercent</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td id="des">TRANSPORTATION </td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+
+
+                        <td id="amt">@Model.Trasport.Sum(m => m.TransportBill)</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td id="des"><strong>GRAND TOTAL</strong></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+                        <td id="qua"></td>
+                        <td id="rate"></td>
+
+                        <td id="amt"><strong>@grandTotal</strong></td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-danger col-lg-offset-4 col-lg-4" style="border:solid 1px red;">
+                <div class="form-group">
+                    <strong>OUR BANK DETAILS </strong>
+                    <br />
+                    <strong>BANK NAME</strong>: ZENITH
+                    <br />
+                    <strong>NAME OF THE ACCOUNT</strong>: KFA RENTALS
+                    <br />
+                    <strong>ACCOUNT NUMBER </strong>: 1012657767
+                    <br />
+                    <strong>SORT CODE  </strong>: 05715059
+                </div>
+            </div>
+            <br />
+            <br />
+             <button class="bth btn-primary" onclick="javascript:window.print()">Print</button>
+            <button class="bth btn-primary" id="email">Send a copy to the customer</button>
+            
+        </div>
+    </fieldset>
+</div>
+      
+   <script type="text/javascript">
+       $(document).ready(function () {
+           $("#hide").hide();
+           $("#img").hide();
+       });
+
+
+       var check = @Html.Raw(val);
+
+       $("#email").click(function () {
+           $("#hide").hide();
+           $("#img").hide();
+           var presenturl = window.location.href;
+           
+           $.ajax({
+               cache: false,
+               type: "GET",
+               url: "@(Url.RouteUrl("ConvertoPdf"))",
+               data:model=JSON.stringify(check),
+               contentType: 'application/json; charset=utf-8',
+               success: function (data) {
+               },
+               error: function (xhr, ajaxOptions, thrownError) {
+                   alert(thrownError);
+
+               }
+
+           });
+       });
+
+</script>
+
+
+
+    

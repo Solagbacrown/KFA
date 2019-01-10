@@ -1,0 +1,59 @@
+﻿@model sample.Models.ProductsetupModel
+@{
+    ViewBag.Title = "Edit Items";
+}
+<div>
+    @if (Session["exist"] != null)
+    {
+        <div class="alert alert-success">
+            @Session["exist"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+    @if (Session["fail"] != null)
+    {
+        <div class="alert alert-danger">
+            @Session["fail"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Edit Item</h4></div>
+        <div class="panel-body">
+            <div class="col-lg-offset-1">
+                @using (Html.BeginForm("EditItem", "InventoryManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    @Html.LabelFor(x => x.productName)
+                    <br />
+                    @Html.TextBoxFor(model => model.productName, new { @class = "form-control  input-lg", @readonly = "readonly" })
+                    <br />
+                    @Html.LabelFor(x => x.categoryName)
+                    <br />
+                    @Html.TextBoxFor(model => model.categoryName, new { @class = "form-control  input-lg", @readonly = "readonly" })
+                    <br />
+                    @Html.LabelFor(x => x.subcategory)
+                    <br />
+                    @Html.TextBoxFor(model => model.subcategory, new { @class = "form-control  input-lg" })
+                    <br />
+                   @Html.LabelFor(x => x.images)
+    <input type="file" name="uploadedFile" />
+                    <br />
+                    @Html.LabelFor(x => x.price)
+                    <br />
+                    @Html.TextBoxFor(model => model.price, new { @class = "form-control  input-lg" })
+                    <br />
+                    @Html.LabelFor(x => x.quantity)
+                    <br />
+                    @Html.TextBoxFor(model => model.quantity, new { @class = "form-control  input-lg" })
+                    <br />
+                    <input type="submit" value="Edit" class="btn btn-danger form-control" />
+                    @Html.HiddenFor(x=>x.subcatId)
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

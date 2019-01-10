@@ -1,0 +1,303 @@
+﻿@model sample.Models.QuotationModel
+
+@{
+    ViewBag.Title = "CreateQuotation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<script type="text/javascript" src="~/Scritps/jquery.min.js"></script>
+<div>
+    @if (TempData["customerempty"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["customerempty"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+</div>
+<div class="panel panel-default text-uppercase">
+<div class="panel-heading" style="font-size:xx-large"><img src="~/Content/Images/logo.png" alt="Smiley face" />KFA Quotations</div>
+<div class="panel-body">
+    <fieldset class="col-lg-4 form-group">
+
+        <legend>Quotations</legend>
+        <div class="form-group">
+            @Html.LabelFor(x => x.cutomerId, new { @class = "" })
+
+            @Html.DropDownListFor(model => model.cutomerId, Model.cutomerList, "Select Customers", new { @id = "customerId", @class = "form-control input-sm" })
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.HomeAddress, new { @class = "" })
+            @Html.TextBoxFor(model => model.HomeAddress, new { @id = "address", @class = "form-control input-sm", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.PhoneNumber, new { @class = "" })
+            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control input-sm", @id = "phone", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.EmailAddress, new { @class = "" })
+            @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control input-sm", @id = "email", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+
+            <button class="btn btn-default" id="add"> @Html.ActionLink("Add new Customer", "Createcustomers", new { controller = "CustomerManager" })</button>
+        </div>
+        <label><span class="col-lg-12" style="color:red" id="customerName">Please Select Customer to Create Quotation</span></label>
+    </fieldset>
+        <fieldset class="col-lg-4 form-group ">
+            <legend>Items</legend>
+            @using (Ajax.BeginForm("CreateQuotation", "Quotation", new AjaxOptions { HttpMethod = "post" }, new { @class = "", @id = "formId" }))
+            {
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.ProductId, new { @class = "" })
+                    @Html.DropDownListFor(model => model.ProductId, Model.ProductList, "Select Product", new { @id = "productId", @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.categoryId, new { @class = "" })
+                    @Html.DropDownListFor(model => model.categoryId, Model.CategoryList, new { @id = "categoryId", @class = "form-control input-sm" })
+                    @*<span id="states-loading-progress" style="display: none;">Please wait..</span>*@
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.subcategoryId, new { @class = "" })
+                    @Html.DropDownListFor(model => model.subcategoryId, Model.SubCategoryList, "Select Subcategory", new { @Id = "subcategoryId", @class = "form-control input-sm" })
+                    <span id="states-loading-progress" style="display: none;">Please wait..</span>
+                </div>
+                @*<div class="form-group">
+                    @Html.LabelFor(x => x.description, new { @class = "" })
+                    @Html.TextBoxFor(model => model.description, new { @Id = "", @class = "form-control input-sm", placeholder = "Description" })
+                </div>*@
+
+                <div class="form-group">
+                    <div class="input-group spinner">
+                        @Html.LabelFor(x => x.Quantity, new { @class = "" })
+                        @Html.TextBoxFor(model => model.Quantity, new { @Id = "", @class = "form-control input-sm", value = "42" })
+                        <div class="input-group-btn-vertical">
+                            <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                            <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <br />
+                    <input type="submit" value="Add Product" class="btn btn-primary form-control col-xs-2" id="butt" />
+                </div>
+            }
+
+           
+        </fieldset>
+    <fieldset class="col-lg-4 form-group ">
+        <legend>Select Setup Location(s)</legend>
+        @using (Ajax.BeginForm("GrandQuotation", "Quotation", new AjaxOptions { HttpMethod = "post" }, new { @class = "form", @id = "formId" }))
+        {
+            <div id="listbox" class="input-sm" style="border: solid 1px; width:270px; height:60px; overflow:scroll;display:list-item;">
+                @*<div class="form-group">*@
+                @foreach (var item in Model.Locations)
+                {
+                    var insertme = item.Selected ? "checked=\"checked\"" : @String.Empty;
+                    var forname = "for=\"group" + @item.Value + "\"";
+                    var idName = "id=\"group" + @item.Value + "\"";
+
+                    <ul class="list-unstyled col-lg-offset-1">
+                        <li style="font-family:Candara;font-weight:lighter;color:royalblue; padding-left:1em">
+                            <label class="checkbox" @forname>
+                                <input id="checker" type="checkbox" name="groups" value="@item.Value"
+                                       @idName @insertme />
+                                @item.Text
+                            </label>
+                        </li>
+                    </ul>
+                }
+            </div>
+            <div class="form-group date" id="">
+                @Html.LabelFor(x => x.EventDate, new { @class = "" })
+                @Html.TextBoxFor(model => model.EventDate, "{0:MM-dd-yyyy}", new { @Id = "datetime1", @class = "form-control input-sm" })
+
+            </div>
+            <div class="form-group col-lg-offset-0" id="">
+                @Html.LabelFor(x => x.SetupDate, new { @class = "" })
+                @Html.TextBoxFor(model => model.SetupDate, "{0:MM-dd-yyyy}", new { @Id = "datetime2", @class = "form-control input-sm" })
+
+            </div>
+            <div class="form-group col-lg-offset-0">
+                @Html.LabelFor(x => x.DeliveryAddress, new { @class = "" })
+                @Html.TextAreaFor(model => model.DeliveryAddress, new { @Id = "", @class = "form-control input-sm", placeholder = "Delivery Full Address" })
+            </div>
+            <div class="form-group col-lg-offset-0" style="padding-top:1.3em">
+
+                <input type="submit" value="Create Quotation" class="btn btn-primary form-control col-xs-2" />
+            </div>
+        }
+    </fieldset>
+
+
+
+        <div id="rep1">@Html.Partial("LoadGrid")</div>
+    </div>
+    </div>
+  
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#billgrid").hide();
+            $("input:checkbox:checked").attr("checked", false);
+            $("#add").hide();
+            $('.spinner .btn:first-of-type').on('click', function () {
+                $('.spinner input').val(parseInt($('.spinner input').val(), 10) + 1);
+            });
+            $('.spinner .btn:last-of-type').on('click', function () {
+                $('.spinner input').val(parseInt($('.spinner input').val(), 10) - 1);
+            });
+            $('#datetime1').datepicker();
+            $('#datetime2').datepicker();
+        });
+
+
+        $("#productId").change(function () {
+            var selectedItem = $(this).val();
+            var ddlStates = $("#categoryId");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.RouteUrl("GetCategoryByProductId"))",
+                data: { "productId": selectedItem },
+                success: function (data) {
+                    ddlStates.html('');
+                    $.each(data, function (id, option) {
+                        ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                        $("#subcategoryId").val(loadsub())
+                    });
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+
+                }
+            });
+
+
+        });
+
+
+        $("#customerId").change(function () {
+            var selectedItem = $(this).val();
+
+            var Progress = $("#progress");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.RouteUrl("GetCustomerInfo"))",
+                data: { "customerId": selectedItem },
+                dataType: 'json',
+                success: function (data) {
+                    if (selectedItem == "1015") {
+                        $("#add").show();
+                    }
+                    else {
+                        $("#add").hide();
+                    }
+                    $("#address").val(data.Address);
+                    $("#phone").val(data.PhoneNumber);
+                    $("#homeAddress").val(data.Address);
+                    $("#email").val(data.EmailAddress)
+                    $("#customerName").html("Quotation For :" + " " + data.FullName);
+                    $("#customerName").css("color", "green");
+                    //loadgrid();
+                    Progress.hide();
+                },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+
+                }
+
+
+            });
+        });
+
+        function loadsub() {
+            var selectedItem = $("#categoryId").val();
+            var ddlStates = $("#subcategoryId");
+            var statesProgress = $("#states-loading-progress");
+            statesProgress.show();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.RouteUrl("GetSubCategoryBycatId"))",
+                data: { "categoryId": selectedItem },
+                success: function (data) {
+                    ddlStates.html('');
+                    $.each(data, function (id, option) {
+                        ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                    });
+                    statesProgress.hide();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+        }
+
+        $("#formId").submit(function (event) {
+            event.preventDefault();
+            var formData = {
+
+            };
+
+            // process the form
+            $.ajax({
+                type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                url: "@(Url.RouteUrl("CreateQuotation"))", // the url where we want to POST
+                data: $('#formId').serializeArray(), // our data object
+                // what type of data do we expect back from the server
+                success: function (data) {
+                    $('td').remove();
+                    loadgrid();
+                }
+
+            })
+
+
+        });
+
+
+        function loadgrid() {
+            $.ajax({
+                type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
+                url: "@(Url.RouteUrl("LoadGrid"))", // the url where we want to POST
+                dataType: 'json',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        tr = $('<tr/>');
+                        tr.append("<td>" + data[i].description + "</td>");
+                        tr.append("<td>" + data[i].Quantity + "</td>");
+                        tr.append("<td>" + data[i].Rate + "</td>");
+                        tr.append("<td>" + data[i].Amount + "</td>");
+                        tr.append("<td>" + "<a href=#" + "data-value=" + data[i].BillId + ">" + "Remove Product" + "</a>" + "</td>");
+                        $('table').append(tr); ""
+                    }
+
+                    $("#billgrid").show();
+
+
+
+
+
+                }
+
+            });
+        }
+
+
+
+
+
+
+    </script>

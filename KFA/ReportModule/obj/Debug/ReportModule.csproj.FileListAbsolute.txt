@@ -1,0 +1,7 @@
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\ReportModule\bin\Debug\ReportModule.dll
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\ReportModule\bin\Debug\ReportModule.pdb
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\ReportModule\bin\Debug\itextsharp.dll
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\ReportModule\bin\Debug\itextsharp.xml
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\ReportModule\obj\Debug\ReportModule.dll
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\ReportModule\obj\Debug\ReportModule.pdb
+C:\Users\gbenga\Documents\E-Resolver Runtime Technologies\sample\ReportModule\obj\Debug\ReportModule.csprojResolveAssemblyReference.cache

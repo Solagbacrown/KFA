@@ -1,0 +1,1160 @@
+﻿@model sample.Models.ProductsetupModel
+@{
+    ViewBag.Title = "AllInventory";
+}
+@if (Session["Success"] != null)
+{
+    <div class="alert alert-success">
+        @Session["Success"].ToString();
+        <a href="#" class="close">&times;</a>
+    </div>
+}
+
+<div class="col-lg-12" style="width:100%">
+    <div class="panel panel-default text-uppercase">
+
+        <div class="panel-heading" style="font-size:xx-large"><img src="~/Content/Images/logo.png" alt="Smiley face" />KFA Stocks</div>
+        <div class="panel-body">
+            <button class="btn btn-default">@Html.ActionLink("STOCK SETUP", "SetupProducts", "Products")</button>
+
+            <table class="table table-condensed" style="border-collapse:collapse;">
+
+                <thead>
+                    <tr>
+                        <th>RENTAL ITEMS</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr data-toggle="collapse" data-target="#RentalItem" class="accordion-toggle">
+                        <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp; RENTALS ITEMS</span></button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="12" class="hiddenRow">
+                            <div id="RentalItem" class="accordian-body collapse">
+                                <table class="table table-condensed" style="border-collapse:collapse;">
+
+                                    <thead>
+                                        <tr>
+                                            <th>PRODUCT NAME</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp; CHAIRS</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="12" class="hiddenRow">
+                                                <div class="accordian-body collapse" id="demo1">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Chairlist)
+                                                            {
+                                                                <tr>
+                                                                    
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;CROWD CONTROL</span></button></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo2" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Crowdlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td> &#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Fan</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo3" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*----*@
+                                        <tr data-toggle="collapse" data-target="#demo4" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;ICE CHEST</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo4" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.IceChest)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*---*@
+                                        <tr data-toggle="collapse" data-target="#demo5" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;KIDDIES</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo5" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.kiddies)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*------*@
+
+                                        <tr data-toggle="collapse" data-target="#demo6" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;LED FURNITURE</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo6" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.LedFurniture)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        @*--------*@
+                                        <tr data-toggle="collapse" data-target="#demo7" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;LOUNGE FURNITURE</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo7" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.LOUNGEFURNITURE)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        @*-----------*@
+                                        <tr data-toggle="collapse" data-target="#demo20" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;TABLE</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo20" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Table)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*-------------*@
+                                        <tr data-toggle="collapse" data-target="#demo8" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open text-uppercase">&nbsp;Beach Umbrella set(Includes 6 ArmLess Plastic Chairs & tables)</span></button></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo8" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.BEACH)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*---------------*@
+                                        <tr data-toggle="collapse" data-target="#demo9" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open text-uppercase">&nbsp;Tents & Marquees</span></button></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo9" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.TENTMANIQUESS)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*------------------*@
+                                        <tr data-toggle="collapse" data-target="#demo10" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open text-uppercase">&nbsp;Tents & Marquees Accessories</span></button></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="demo10" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.TENTAccessories)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*--------------------*@
+                                    </tbody>
+
+                                </table>
+                            </div>
+            </table>
+
+            @*---------------*@
+            <table class="table table-condensed" style="border-collapse:collapse;">
+
+                <thead>
+                    <tr>
+                        <th>Decoration Items</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr data-toggle="collapse" data-target="#DecorationItems" class="accordion-toggle">
+                        <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Decoration Items</span></button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="12" class="hiddenRow">
+                            <div id="DecorationItems" class="accordian-body collapse">
+                                <table class="table table-condensed" style="border-collapse:collapse;">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr data-toggle="collapse" data-target="#rdemo1" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Centerpieces</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="12" class="hiddenRow">
+                                                <div class="accordian-body collapse" id="rdemo1">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Chairlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#rdemo2" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Cutleries</span></button></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo2" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Crowdlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td> &#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#rdemo3" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Flower balls</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo3" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*----*@
+                                        <tr data-toggle="collapse" data-target="#rdemo4" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Lanterns</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo4" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*---*@
+                                        <tr data-toggle="collapse" data-target="#rdemo5" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Mirrors</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo5" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*------*@
+
+                                        <tr data-toggle="collapse" data-target="#rdemo6" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Napkins</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo6" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        @*--------*@
+                                        <tr data-toggle="collapse" data-target="#rdemo7" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Overlay</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo7" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        @*-----------*@
+                                        <tr data-toggle="collapse" data-target="#rdemo7" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Plate</span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo7" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Delete", "Delete", new { id = item.subcatId })
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*-------------*@
+                                        <tr data-toggle="collapse" data-target="#rdemo8" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Plate Chargers</span></button></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo8" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Delete", "Delete", new { id = item.subcatId })
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*---------------*@
+                                        <tr data-toggle="collapse" data-target="#rdemo9" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Runners</span></button></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo9" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId }) |
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*------------------*@
+                                        <tr data-toggle="collapse" data-target="#rdemo10" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Table Cover</span></button></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo10" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*--------------------*@
+                                        <tr data-toggle="collapse" data-target="#rdemo11" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open">&nbsp;Vase</span></button></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="rdemo11" class="accordian-body collapse">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            @*<tr><td><a href="WorkloadURL">Workload link</a></td><td>Bandwidth: Dandwidth Details</td><td>OBS Endpoint: end point</td></tr>*@
+                                                            <tr>
+                                                                <th>@Html.DisplayNameFor(model => model.images)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.subcategory)</th>
+                                                                <th>@Html.DisplayNameFor(model => model.price)</th>
+                                                                <th> @Html.DisplayNameFor(model => model.quantity)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.Fanlist)
+                                                            {
+                                                                <tr>
+                                                                    <td><img src="~/Images/@item.images" width="50" height="50" /></td>
+                                                                    <td>@Html.DisplayFor(m => item.categoryName)</td>
+                                                                    <td>@Html.DisplayFor(m => item.subcategory)</td>
+                                                                    <td>&#x20a6 @Html.DisplayFor(m => item.price)</td>
+                                                                    <td>@Html.DisplayFor(m => item.quantity)</td>
+                                                                    <td>
+                                                                        @Html.ActionLink("Edit", "EditItem", new { id = item.subcatId }) |
+                                                                        @Html.ActionLink("Details", "DetailsItem", new { id = item.subcatId })
+                                                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.subcatId })*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*--------------*@
+                                    </tbody>
+
+                                </table>
+                            </div>
+            </table>
+            @*------------------*@
+        </div>
+
+    </div>
+    </div>
+

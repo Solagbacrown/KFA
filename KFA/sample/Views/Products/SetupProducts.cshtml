@@ -1,0 +1,126 @@
+﻿@model sample.Models.ProductsetupModel
+@{
+    ViewBag.Title = "Stock SetUp";
+}
+
+
+
+<div>
+    @if (Session["exist"] != null)
+    {
+        <div class="alert alert-success">
+            @Session["exist"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+    @if (Session["fail"] != null)
+    {
+        <div class="alert alert-danger">
+            @Session["fail"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+    
+</div>
+<div class="col-lg-12 text-uppercase">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Stock Setup</h4></div>
+        <div class="panel-body">
+            @*<div class="col-lg-offset-1">
+               
+                <fieldset class="col-lg-3">
+                    <legend>Products</legend>
+                    @using (Ajax.BeginForm("SetupProduct", "Products", new AjaxOptions { HttpMethod = "post" }))
+                    {
+                        @Html.LabelFor(x => x.productName)
+                        <br />
+                        @Html.TextBoxFor(model => model.productName, new { @class = "form-control  input-lg" })
+                        @Html.ValidationMessageFor(model => model.productName)
+                        <br />
+                        <input type="submit" value="Create" class="btn btn-kfa form-control" />
+                    }
+                </fieldset>
+            </div>*@
+
+            <div class="col-lg-offset-1">
+                <fieldset class="col-lg-3">
+                    <legend>Category</legend>
+                    @using (Ajax.BeginForm("SetupCategories", "Products", new AjaxOptions { HttpMethod = "post" }))
+                    {
+                        @Html.LabelFor(x => x.Products)
+                        @Html.DropDownListFor(model => model.ProductId, Model.Products, "Select Product", new { @class = "form-control  input-lg" })
+                        <br />
+                        @Html.LabelFor(x => x.categoryName)
+                        @Html.TextBoxFor(model => model.categoryName, new { @class = "form-control  input-lg" })
+                        @Html.ValidationMessageFor(model => model.categoryName)
+                        <br />
+                        <input type="submit" value="CREATE" class="btn btn-kfa form-control" />
+                    }
+                </fieldset>
+            </div>
+
+            <div class="col-lg-offset-6">
+                <fieldset class="col-lg-5">
+                    <legend>Subcategory</legend>
+                    @using (Ajax.BeginForm("SetupSubCategories", "Products", new AjaxOptions { HttpMethod = "post" }, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.LabelFor(x => x.Products)
+                        @Html.DropDownListFor(model => model.ProductId, Model.Products, "Select Product", new { @id="productId", @class = "form-control  input-lg" })
+                        <br />
+                        @Html.LabelFor(x => x.categoryName)
+                        @Html.DropDownListFor(model => model.catgoryId, Model.Categories, "Select Category", new { @id = "categoryId", @class = "form-control  input-lg" })
+                        <br />
+                        @Html.LabelFor(x => x.subcategory)
+                        @Html.TextBoxFor(model => model.subcategory, new { @class = "form-control  input-lg" })
+                        @Html.ValidationMessageFor(model => model.subcategory)
+                        <br />
+                       @Html.LabelFor(x => x.images)
+             
+                      <input type="file" name="uploadedFile" />
+                        <br />
+                        @Html.LabelFor(x => x.price)
+                        @Html.TextBoxFor(model => model.price, new { @class = "form-control  input-lg" })
+                        @Html.ValidationMessageFor(model => model.categoryName)
+                        <br />
+                        <br />
+                        @Html.LabelFor(x => x.quantity)
+                        @Html.TextBoxFor(model => model.quantity, new { @class = "form-control  input-lg" })
+                        @Html.ValidationMessageFor(model => model.quantity)
+                        <br />
+                        <input type="submit" value="CREATE" class="btn btn-kfa form-control" />
+                    }
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $("#productId").change(function () {
+        var selectedItem = $(this).val();
+        var ddlStates = $("#categoryId");
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.RouteUrl("GetCategoryByProductId"))",
+            data: { "productId": selectedItem },
+        success: function (data) {
+            ddlStates.html('');
+            $.each(data, function (id, option) {
+                ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                $("#subcategoryId").val(loadsub())
+            });
+
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert('Failed to retrieve states.');
+
+        }
+    });
+
+
+    });
+
+</script>

@@ -1,0 +1,56 @@
+﻿@model sample.Models.CustomerModel
+@{
+    ViewBag.Title = "Create Customers";
+}
+<div>
+    @if (Session["exist"] != null)
+    {
+        <div class="alert alert-success">
+            @Session["exist"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+    @if (Session["fail"] != null)
+    {
+        <div class="alert alert-danger">
+            @Session["fail"].ToString();
+            <a href="#" class="close">&times;</a>
+        </div>
+    }
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Edit Item</h4></div>
+        <div class="panel-body">
+            <div class="col-lg-offset-1">
+
+                <h4>Edit Customers</h4>
+                @using (Ajax.BeginForm("Editcustomers", "CustomerManager", new AjaxOptions { HttpMethod = "post" }))
+                {
+
+                    @Html.LabelFor(x => x.FullName)
+                    <br />
+                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control  input-lg" })
+                    <br />
+                    @Html.LabelFor(x => x.Adress)
+                    <br />
+                    @Html.TextAreaFor(model => model.Adress, new { @class = "form-control  input-lg" })
+                    <br />
+                    @Html.LabelFor(x => x.EmailAdress)
+                    <br />
+                    @Html.TextBoxFor(model => model.EmailAdress, new { @class = "form-control  input-lg" })
+
+                    <br />
+                    @Html.LabelFor(x => x.PhoneNumber)
+                    <br />
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control  input-lg" })
+
+                    <br />
+                    <input type="submit" value="Edit" class="btn btn-danger form-control" />
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
